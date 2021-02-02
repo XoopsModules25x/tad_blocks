@@ -9,10 +9,11 @@ function get_content($bid = 0)
     foreach ($default as $k => $v) {
         $xoopsTpl->assign($k, $v);
     }
+    $xoopsTpl->assign('default', $default);
 
     // 傳回陣列的項目
     if ($bid) {
-        $arr = ['groups', 'content'];
+        $arr = ['groups', 'content', 'url', 'target'];
         $TadDataCenter = new TadDataCenter('tad_blocks');
         $TadDataCenter->set_col('bid', $bid);
         $block = $TadDataCenter->getData();
@@ -36,7 +37,11 @@ function mk_content($TDC)
     $myts = \MyTextSanitizer::getInstance();
     $marquee = '';
     foreach ($TDC['content'] as $key => $item) {
-        $marquee .= '<li>' . $item . '</li>';
+        if (!empty($TDC['url'][$key])) {
+            $marquee .= '<li><a href="' . $TDC['url'][$key] . '" target="' . $TDC['target'][$key] . '">' . $item . '</a></li>';
+        } else {
+            $marquee .= '<li>' . $item . '</li>';
+        }
     }
 
     $font_size = empty($TDC['font_size']) ? $default['font_size'] : (int) $TDC['font_size'];
@@ -48,6 +53,8 @@ function mk_content($TDC)
     $border_color = empty($TDC['border_color']) ? $default['border_color'] : $myts->addSlashes($TDC['border_color']);
     $height = $font_size + ($padding_y * 2) + ($border_size * 2);
 
+    $font_size_em = round($font_size / 16, 2);
+
     $content = '<link href="' . XOOPS_URL . '/modules/tad_blocks/type/marquee/jquery.marquee/css/jquery.marquee.css" rel="stylesheet" type="text/css">';
     $content .= '<script type="text/javascript" src="' . XOOPS_URL . '/modules/tad_blocks/type/marquee/jquery.marquee/lib/jquery.marquee.js"></script>';
     $content .= '<style type="text/css" media="screen">';
@@ -58,7 +65,7 @@ function mk_content($TDC)
     $content .= '    border: ' . $border_size . 'px ' . $border_type . ' ' . $border_color . ';';
     $content .= '}';
     $content .= 'ul#tad_blocks_marquee2 li {';
-    $content .= '    font-size: ' . $font_size . 'px;';
+    $content .= '    font-size: ' . $font_size_em . 'em;';
     $content .= '    color: ' . $text_color . ';';
     $content .= '    padding: ' . $padding_y . 'px 5px;';
     $content .= '}';

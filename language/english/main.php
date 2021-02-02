@@ -20,7 +20,6 @@
 // xoops_loadLanguage('admin', 'tad_themes');
 xoops_loadLanguage('main', 'tadtools');
 xoops_loadLanguage('admin/blocksadmin', 'system');
-define('_TAD_NEED_TADTOOLS', "This module needs TadTools module. You can download TadTools from <a href='http://campus-xoops.tn.edu.tw/modules/tad_modules/index.php?module_sn=1' target='_blank'>XOOPS Easy Go</a>.");
 define('_MD_TAD_BLOCKS_LEFT', 'Left');
 define('_MD_TAD_BLOCKS_RIGHT', 'Right');
 define('_MD_TAD_BLOCKS_TOP_CENTER', 'Upper');
@@ -37,6 +36,7 @@ define('_MD_TAD_BLOCKS_SETTING', 'Fast setting');
 define('_MD_TAD_ADD_ONE', 'Add a new item');
 define('_MD_TAD_BLOCKS_MY_BLOCKS', 'My custom block');
 define('_MD_TAD_BLOCKS_ADD_BLOCK', 'Add custom block');
+define('_MD_TAD_BLOCKS_CUSTOM_BLOCK', 'Custom block');
 define('_MD_TAD_BLOCKS_TITLE', 'Block title');
 define('_MD_TAD_BLOCKS_TYPE', 'Block type');
 define('_MD_TAD_BLOCKS_POSITION', 'Block location');
@@ -64,9 +64,8 @@ define('_MD_TAD_BLOCKS_LOGO_SHADOW_SIZE', 'Shadow Size');
 define('_MD_TAD_BLOCKS_LOGO_SHADOW_X', 'Shadow X');
 define('_MD_TAD_BLOCKS_LOGO_SHADOW_Y', 'Shadow Y');
 define('_MD_TAD_BLOCKS_LOGO_SELECT_FONT', 'Select font');
-define('_MD_TAD_BLOCKS_LOGO_MAKE_PNG', 'Regenerate the title image of all blocks according to the settings below');
 define('_MD_TAD_BLOCKS_LOGO_NEED_FONT', 'Please <a href="' . XOOPS_URL . '/modules/tad_themes/admin/font2pic.php">upload</a> at least one font');
-define('_MD_TAD_BLOCKS_LOGO_SAVE_PIC', 'Save as Logo');
+define('_MD_TAD_BLOCKS_LOGO_MAKE_PNG', 'Save settings and generate title images for all blocks.');
 define('_MD_TAD_BLOCKS_LOGO_SAVE_AS_LOGO', 'Save Picture');
 define('_MD_TAD_BLOCKS_LOGO_DEMO_BGCOLOR', 'Example Background Color:');
 define('_MD_TAD_BLOCKS_LOGO_HELP', 'If the file is not uploaded, the system will automatically generate the corresponding image according to the settings below.');
@@ -78,6 +77,9 @@ define('_MD_TAD_BLOCKS_TITLE_ICON', 'Put a small icon to the left of the text ti
 define('_MD_TAD_BLOCKS_TITLE_LINK', 'Add title link');
 define('_MD_TAD_BLOCKS_UPLOAD_PIC', 'Please upload image');
 define('_MD_TAD_BLOCKS_WYSIWYG', 'CkEditor');
+define('_MD_TAD_BLOCKS_OPEN_WIDTH_TB', 'Open edit with this module');
+define('_MD_TAD_BLOCKS_ONLY', 'Only: ');
+define('_MD_TADBLOCKS_LIST', 'Advanced Block List');
 
 $dir = XOOPS_ROOT_PATH . "/modules/tad_blocks/type/";
 if (is_dir($dir)) {

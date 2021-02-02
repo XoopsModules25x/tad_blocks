@@ -12,10 +12,11 @@ function get_content($bid = 0)
     foreach ($default as $k => $v) {
         $xoopsTpl->assign($k, $v);
     }
+    $xoopsTpl->assign('default', $default);
 
     // 傳回陣列的項目
     if ($bid) {
-        $arr = ['groups', 'text', 'url', 'icon', 'm_color'];
+        $arr = ['groups', 'text', 'url', 'icon', 'm_color', 'target'];
         $TadDataCenter = new TadDataCenter('tad_blocks');
         $TadDataCenter->set_col('bid', $bid);
         $block = $TadDataCenter->getData();
@@ -46,20 +47,21 @@ function mk_content($TDC)
     $left = $text_align == 'left' ? $font_size + 10 : 0;
     $url = XOOPS_URL;
 
+    $font_size_em = round($font_size / 16, 2);
     $content = <<<"EOD"
 <link href="$url/modules/tad_blocks/type/menu/r_menu.css" rel="stylesheet" type="text/css">
 <style>
-.word {
-    font-size: {$font_size}px;
+.R_menu_bot>.word {
+    font-size: {$font_size_em}em;
     text-align: {$text_align};
     left: {$left}px;
 }
-.icon {
+.R_menu_bot>.icon {
     width: 100%;
     height: 45px;
     top: -45px;
     left: 4px;
-    font-size: {$font_size}px;
+    font-size: {$font_size_em}em;
 }
 </style>
 EOD;
@@ -73,9 +75,10 @@ EOD;
         $icon = empty($TDC['icon'][$key]) ? $default['icon'] : $myts->htmlSpecialChars($TDC['icon'][$key]);
         $text = empty($TDC['text'][$key]) ? $url : $myts->htmlSpecialChars($TDC['text'][$key]);
 
+        $target = !empty($TDC['target'][$key]) ? $TDC['target'][$key] : '_blank';
         $content .= <<<"EOD"
 <div class="img-responsive">
-    <a href="$url" class="a_link" target="_blank">
+    <a href="$url" class="a_link"  target="{$target}">
         <div class="R_menu_bg">
             <div class="R_menu_bot" style="background-color: {$m_color}">
                 <div class="shadow"></div>
